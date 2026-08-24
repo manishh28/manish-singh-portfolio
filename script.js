@@ -55,14 +55,21 @@ document.querySelectorAll('a[href^="#"]').forEach((link) =>
   link.addEventListener("click", (e) => {
     const hash = link.getAttribute("href");
     if (hash.length <= 1) return;
+    e.preventDefault();
+    if (hash === "#top") {
+      if (lenis) {
+        lenis.scrollTo(0, { immediate: true });
+      } else {
+        window.scrollTo({ top: 0, behavior: "auto" });
+      }
+      return;
+    }
     const target = document.querySelector(hash);
     if (!target) return;
-    e.preventDefault();
-    const immediate = hash === "#top";
     if (lenis) {
-      lenis.scrollTo(target, { offset: -80, immediate });
+      lenis.scrollTo(target, { offset: -80 });
     } else {
-      target.scrollIntoView({ behavior: immediate ? "auto" : "smooth" });
+      target.scrollIntoView({ behavior: "smooth" });
     }
   })
 );
