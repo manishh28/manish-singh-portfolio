@@ -58,10 +58,11 @@ document.querySelectorAll('a[href^="#"]').forEach((link) =>
     const target = document.querySelector(hash);
     if (!target) return;
     e.preventDefault();
+    const immediate = hash === "#top";
     if (lenis) {
-      lenis.scrollTo(target, { offset: -80 });
+      lenis.scrollTo(target, { offset: -80, immediate });
     } else {
-      target.scrollIntoView({ behavior: "smooth" });
+      target.scrollIntoView({ behavior: immediate ? "auto" : "smooth" });
     }
   })
 );
