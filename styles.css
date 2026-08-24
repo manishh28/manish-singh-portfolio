@@ -33,8 +33,24 @@
 }
 
 html {
-  scroll-behavior: smooth;
   scroll-padding-top: 90px;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
 }
 
 body {
@@ -338,27 +354,50 @@ button {
   color: var(--text-muted);
 }
 
-.skills-grid {
+.marquee {
+  overflow: hidden;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 12px;
-  max-width: 860px;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 1100px;
   margin: 0 auto;
+  -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 32s linear infinite;
+}
+
+.marquee-track.marquee-reverse {
+  animation-direction: reverse;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 .skill {
   padding: 10px 20px;
+  margin-right: 14px;
   border-radius: 999px;
   border: 1px solid var(--border);
   background: var(--bg-card);
   font-size: 0.9rem;
   font-weight: 500;
-  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+  white-space: nowrap;
+  transition: border-color 0.2s ease, background 0.2s ease;
 }
 
 .skill:hover {
-  transform: translateY(-3px);
   border-color: var(--text);
 }
 
@@ -719,12 +758,34 @@ button {
 .reveal {
   opacity: 0;
   transform: translateY(24px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  filter: blur(6px);
+  transition: opacity 0.7s ease, transform 0.7s ease, filter 0.7s ease;
+  will-change: opacity, transform, filter;
 }
 
 .reveal.visible {
   opacity: 1;
   transform: none;
+  filter: blur(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+
+  .marquee-track {
+    animation: none;
+    flex-wrap: wrap;
+    width: auto;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 @media (max-width: 900px) {
