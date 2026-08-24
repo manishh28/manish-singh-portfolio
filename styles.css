@@ -817,6 +817,11 @@ button {
   gap: 14px;
 }
 
+.cv-download {
+  margin-top: 48px;
+  text-align: center;
+}
+
 .cert {
   display: flex;
   flex-direction: column;
