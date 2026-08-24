@@ -385,7 +385,17 @@ button {
   }
 }
 
+.svg-sprite {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
 .skill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   padding: 10px 20px;
   margin-right: 14px;
   border-radius: 999px;
@@ -395,6 +405,12 @@ button {
   font-weight: 500;
   white-space: nowrap;
   transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.skill-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
 }
 
 .skill:hover {
@@ -446,9 +462,10 @@ button {
 }
 
 .hindcare-banner img {
-  max-height: 86%;
-  max-width: 62%;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
+  padding: 12px 60px;
 }
 
 .weather-banner {
@@ -861,22 +878,6 @@ button {
   justify-content: center;
   gap: 14px;
   flex-wrap: wrap;
-}
-
-.contact-meta {
-  margin-top: 32px;
-  display: flex;
-  justify-content: center;
-  gap: 28px;
-  flex-wrap: wrap;
-}
-
-.contact-meta span {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  font-size: 0.875rem;
-  color: var(--text-muted);
 }
 
 .site-footer {
