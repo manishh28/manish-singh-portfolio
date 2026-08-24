@@ -410,10 +410,11 @@ button {
 .project-card {
   display: flex;
   flex-direction: column;
-  padding: 26px;
+  padding: 0;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   background: var(--bg-card);
+  overflow: hidden;
   transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
@@ -423,24 +424,160 @@ button {
   border-color: var(--text-muted);
 }
 
-.project-logo {
-  width: 56px;
-  height: 56px;
-  border-radius: 14px;
-  background: var(--bg-soft);
-  border: 1px solid var(--border);
-  display: grid;
-  place-items: center;
-  margin-bottom: 16px;
+.project-banner {
+  height: 120px;
+  position: relative;
   overflow: hidden;
-  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
 }
 
-.project-logo img {
-  width: 100%;
-  height: 100%;
+.project-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 20px 24px 24px;
+}
+
+.hindcare-banner {
+  background: #ffffff;
+  display: grid;
+  place-items: center;
+}
+
+.hindcare-banner img {
+  max-height: 86%;
+  max-width: 62%;
   object-fit: contain;
-  padding: 6px;
+}
+
+.weather-banner {
+  background: linear-gradient(180deg, #5aa9ee 0%, #93c9f2 62%, #c8e4f8 100%);
+}
+
+.weather-banner .sun {
+  position: absolute;
+  top: 14px;
+  right: 20px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #ffd55a;
+  box-shadow: 0 0 16px 5px rgba(255, 213, 90, 0.55);
+  animation: sun-glow 3s ease-in-out infinite;
+}
+
+@keyframes sun-glow {
+  0%, 100% { box-shadow: 0 0 12px 4px rgba(255, 213, 90, 0.45); }
+  50% { box-shadow: 0 0 24px 10px rgba(255, 213, 90, 0.7); }
+}
+
+.cloud {
+  position: absolute;
+  width: 56px;
+  height: 16px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 999px;
+}
+
+.cloud::before,
+.cloud::after {
+  content: "";
+  position: absolute;
+  background: inherit;
+  border-radius: 50%;
+}
+
+.cloud::before {
+  width: 24px;
+  height: 24px;
+  top: -11px;
+  left: 9px;
+}
+
+.cloud::after {
+  width: 16px;
+  height: 16px;
+  top: -7px;
+  right: 10px;
+}
+
+.cloud-1 {
+  top: 16px;
+  animation: drift 13s linear infinite;
+}
+
+.cloud-2 {
+  top: 54px;
+  transform: scale(0.65);
+  animation: drift 19s linear infinite;
+  animation-delay: -8s;
+}
+
+.cloud-3 {
+  top: 36px;
+  transform: scale(0.85);
+  animation: drift 16s linear infinite;
+  animation-delay: -13s;
+}
+
+@keyframes drift {
+  from { left: -80px; }
+  to { left: 100%; }
+}
+
+.car-banner {
+  background: linear-gradient(180deg, #a8d4f0 0%, #d9ecf8 60%, #d9ecf8 100%);
+}
+
+.road {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 38px;
+  background: #34343a;
+}
+
+.road::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 3px;
+  transform: translateY(-50%);
+  background: repeating-linear-gradient(90deg, #f4f4f5 0 16px, transparent 16px 34px);
+}
+
+.car {
+  position: absolute;
+  width: 50px;
+  height: 25px;
+}
+
+.car-1 {
+  bottom: 24px;
+  animation: drive-right 10s linear infinite;
+}
+
+.car-2 {
+  bottom: 3px;
+  width: 60px;
+  height: 30px;
+  transform: scaleX(-1);
+  animation: drive-left 6.5s linear infinite;
+  animation-delay: -3.2s;
+}
+
+@keyframes drive-right {
+  from { left: -70px; }
+  to { left: 100%; }
+}
+
+@keyframes drive-left {
+  from { left: calc(100% + 80px); }
+  to { left: -90px; }
 }
 
 .project-top {
@@ -802,6 +939,18 @@ button {
     flex-wrap: wrap;
     width: auto;
   }
+
+  .weather-banner .sun,
+  .cloud,
+  .car {
+    animation: none;
+  }
+
+  .cloud-1 { left: 12%; }
+  .cloud-2 { left: 55%; }
+  .cloud-3 { left: 78%; }
+  .car-1 { left: 18%; }
+  .car-2 { left: 62%; }
 
   html {
     scroll-behavior: auto;
